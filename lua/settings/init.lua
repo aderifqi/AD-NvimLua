@@ -30,3 +30,6 @@ set.cursorline = true
 
 set.hidden = true
 set.clipboard = "unnamedplus"
+
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.foldcolumn = '1'

@@ -41,13 +41,23 @@ local lsp_flags = {
     debounce_text_changes = 150,
 }
 
+local lspconfig = require('lspconfig')
+-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+local servers = { 'html', 'phpactor', 'vuels', 'tsserver', 'jsonls' }
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup{
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+end
 require 'lspconfig'.jedi_language_server.setup {
     capabilities = capabilities,
-    on_attach = require "lsp-format".on_attach,
+    on_attach = on_attach,
+
 }
 require 'lspconfig'.sumneko_lua.setup {
     capabilities = capabilities,
-    on_attach = require "lsp-format".on_attach,
+    on_attach = on_attach,
     settings = {
         Lua = {
             runtime = {
@@ -68,16 +78,4 @@ require 'lspconfig'.sumneko_lua.setup {
             },
         },
     },
-}
-require('lspconfig').html.setup {
-    on_attach = require "lsp-format".on_attach,
-    capabilities = capabilities
-}
-require 'lspconfig'.phpactor.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-require 'lspconfig'.vuels.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
 }

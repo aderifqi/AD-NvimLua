@@ -119,16 +119,6 @@ _G.packer_plugins = {
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/gv.vim",
     url = "https://github.com/junegunn/gv.vim"
   },
-  indentLine = {
-    loaded = true,
-    path = "/home/ad/.local/share/nvim/site/pack/packer/start/indentLine",
-    url = "https://github.com/Yggdroot/indentLine"
-  },
-  ["lsp-format.nvim"] = {
-    loaded = true,
-    path = "/home/ad/.local/share/nvim/site/pack/packer/start/lsp-format.nvim",
-    url = "https://github.com/lukas-reineke/lsp-format.nvim"
-  },
   ["lspkind.nvim"] = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/lspkind.nvim",
@@ -148,6 +138,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
     url = "https://github.com/EdenEast/nightfox.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -169,6 +169,12 @@ _G.packer_plugins = {
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
   },
+  ["nvim-search-and-replace"] = {
+    config = { "\27LJ\2\nE\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\28nvim-search-and-replace\frequire\0" },
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-search-and-replace",
+    url = "https://github.com/s1n7ax/nvim-search-and-replace"
+  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
@@ -189,6 +195,11 @@ _G.packer_plugins = {
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow",
     url = "https://github.com/p00f/nvim-ts-rainbow"
   },
+  ["nvim-ufo"] = {
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-ufo",
+    url = "https://github.com/kevinhwang91/nvim-ufo"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -204,6 +215,16 @@ _G.packer_plugins = {
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["promise-async"] = {
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/promise-async",
+    url = "https://github.com/kevinhwang91/promise-async"
+  },
+  ["shade.nvim"] = {
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/shade.nvim",
+    url = "https://github.com/sunjon/shade.nvim"
+  },
   tagbar = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/tagbar",
@@ -218,10 +239,24 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-mustache-handlebars"] = {
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/vim-mustache-handlebars",
+    url = "https://github.com/mustache/vim-mustache-handlebars"
+  },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-search-and-replace
+time([[Config for nvim-search-and-replace]], true)
+try_loadstring("\27LJ\2\nE\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\28nvim-search-and-replace\frequire\0", "config", "nvim-search-and-replace")
+time([[Config for nvim-search-and-replace]], false)
 if should_profile then save_profiles() end
 
 end)
