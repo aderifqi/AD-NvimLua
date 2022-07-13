@@ -4,7 +4,7 @@ local formatting = null_ls.builtins.formatting
 
 null_ls.setup({
     sources = {
-        formatting.prettier, formatting.black, formatting.gofmt, formatting.shfmt,
+        formatting.prettierd, formatting.black, formatting.gofmt, formatting.shfmt,
         formatting.clang_format, formatting.cmake_format, formatting.dart_format,
         formatting.lua_format.with({
             extra_args = {

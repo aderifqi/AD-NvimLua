@@ -34,27 +34,22 @@ end
 
 require("nvim-lsp-installer").setup {}
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities_lsp = vim.lsp.protocol.make_client_capabilities()
+capabilities_lsp.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
+local capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities_lsp)
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 local lsp_flags = {
     -- This is the default in Nvim 0.7+
-    debounce_text_changes = 150,
+    debounce_text_changes = 150
 }
 
 local lspconfig = require('lspconfig')
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'html', 'phpactor', 'vuels', 'tsserver', 'jsonls' }
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup{
-    on_attach = on_attach,
-    capabilities = capabilities
-  }
+    lspconfig[lsp].setup { on_attach = on_attach, capabilities = capabilities, flags = lsp_flags }
 end
-require 'lspconfig'.jedi_language_server.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-
-}
+require 'lspconfig'.jedi_language_server.setup { capabilities = capabilities, on_attach = on_attach }
 require 'lspconfig'.sumneko_lua.setup {
     capabilities = capabilities,
     on_attach = on_attach,
@@ -62,20 +57,18 @@ require 'lspconfig'.sumneko_lua.setup {
         Lua = {
             runtime = {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
+                version = 'LuaJIT'
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
+                globals = { 'vim' }
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
+                library = vim.api.nvim_get_runtime_file("", true)
             },
             -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-                enable = false,
-            },
-        },
-    },
+            telemetry = { enable = false }
+        }
+    }
 }
