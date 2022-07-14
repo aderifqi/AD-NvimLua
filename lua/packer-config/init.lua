@@ -20,7 +20,7 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim', -- fuzzy finder
     requires = {{'nvim-lua/plenary.nvim'}}
   }
-
+  use "lukas-reineke/indent-blankline.nvim"
   use 'scrooloose/nerdcommenter' -- comment
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} -- code hightlight
   use 'p00f/nvim-ts-rainbow' -- tag color
