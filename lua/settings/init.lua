@@ -5,10 +5,15 @@ letg.python3_host_prog = '/home/ad/venv/python/bin/python'
 
 set.mouse = 'a'
 
-set.expandtab = true;
-set.smarttab = true
-set.shiftwidth = 4
-set.tabstop = 4
+set.tabstop = 2
+set.tabstop = 2
+set.softtabstop = 2
+set.shiftwidth = 2
+set.shiftwidth = 2
+set.autoindent = true
+set.autoindent = true
+set.expandtab = true
+set.expandtab = true
 
 set.hlsearch = true
 set.incsearch = true
