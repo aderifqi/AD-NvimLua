@@ -31,3 +31,14 @@ map('n', '<leader>ff', ':Telescope find_files<CR>', opts)
 map('n', '<leader>fg', ':Telescope live_grep<CR>', opts)
 map('n', '<leader>fb', ':Telescope buffers<CR>', opts)
 map('n', '<leader>fh', ':Telescope help_tags<CR>', opts)
+
+-- / fold
+map('n', '<leader>fe', ':set foldenable<CR>', opts)
+map('n', '<leader>fd', ':set nofoldenable<CR>', opts)
+
+--- / Markdown Preview
+-- MarkdownPreview
+-- MarkdownPreviewStop
+-- MarkdownPreviewToggle
+map('n', '<leader>mt', ':MarkdownPreviewToggle<CR>', opts)
+map('n', '<leader>fd', ':set nofoldenable<CR>', opts)

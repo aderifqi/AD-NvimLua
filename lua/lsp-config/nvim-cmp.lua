@@ -1,7 +1,7 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require('lspkind')
-vim.g.completeopt = "menu,menuone,noselect"
+vim.g.completeopt = "menu,menuone,noselect,noinsert"
 cmp.setup({
   formatting = {
     format = lspkind.cmp_format({

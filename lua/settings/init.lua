@@ -33,3 +33,4 @@ set.cursorline = true
 
 set.hidden = true
 set.clipboard = "unnamedplus"
+set.wrap = true;

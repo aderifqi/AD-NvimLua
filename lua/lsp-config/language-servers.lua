@@ -32,12 +32,10 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
-require("nvim-lsp-installer").setup {}
 -- Setup lspconfig.
-local capabilities_lsp = vim.lsp.protocol.make_client_capabilities()
-capabilities_lsp.textDocument.foldingRange = {dynamicRegistration = false, lineFoldingOnly = true}
-local capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities_lsp)
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
+                                                                     .make_client_capabilities())
+
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150
@@ -45,17 +43,21 @@ local lsp_flags = {
 
 local lspconfig = require('lspconfig')
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {'phpactor', 'vuels', 'tsserver', 'jsonls'}
+local servers = {'phpactor', 'vuels', 'tsserver', 'jsonls', 'jedi_language_server'}
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {on_attach = on_attach, capabilities = capabilities, flags = lsp_flags}
+  lspconfig[lsp].setup {on_attach = on_attach, capabilities = capabilities}
 end
 require'lspconfig'.html.setup {
-
-  filetypes = {"html", 'html.handlebars'},
+  filetypes = {"html"},
   capabilities = capabilities,
   on_attach = on_attach
 }
-require'lspconfig'.jedi_language_server.setup {capabilities = capabilities, on_attach = on_attach}
+
+lspconfig.emmet_ls.setup({
+  -- on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less'}
+})
 require'lspconfig'.sumneko_lua.setup {
   capabilities = capabilities,
   on_attach = on_attach,

@@ -9,23 +9,26 @@ vim.api.nvim_command('packadd packer.nvim')
 
 local no_errors, error_msg = pcall(function()
 
-  local time
-  local profile_info
-  local should_profile = false
-  if should_profile then
-    local hrtime = vim.loop.hrtime
-    profile_info = {}
-    time = function(chunk, start)
-      if start then
-        profile_info[chunk] = hrtime()
-      else
-        profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
-      end
+_G._packer = _G._packer or {}
+_G._packer.inside_compile = true
+
+local time
+local profile_info
+local should_profile = false
+if should_profile then
+  local hrtime = vim.loop.hrtime
+  profile_info = {}
+  time = function(chunk, start)
+    if start then
+      profile_info[chunk] = hrtime()
+    else
+      profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
     end
-  else
-    time = function(chunk, start) end
   end
-  
+else
+  time = function(chunk, start) end
+end
+
 local function save_profiles(threshold)
   local sorted_times = {}
   for chunk_name, time_taken in pairs(profile_info) do
@@ -38,8 +41,10 @@ local function save_profiles(threshold)
       results[i] = elem[1] .. ' took ' .. elem[2] .. 'ms'
     end
   end
+  if threshold then
+    table.insert(results, '(Only showing plugins that took longer than ' .. threshold .. ' ms ' .. 'to load)')
+  end
 
-  _G._packer = _G._packer or {}
   _G._packer.profile_output = results
 end
 
@@ -134,6 +139,11 @@ _G.packer_plugins = {
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/home/ad/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
   nerdcommenter = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/nerdcommenter",
@@ -173,12 +183,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
-  },
-  ["nvim-search-and-replace"] = {
-    config = { "\27LJ\2\nE\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\28nvim-search-and-replace\frequire\0" },
-    loaded = true,
-    path = "/home/ad/.local/share/nvim/site/pack/packer/start/nvim-search-and-replace",
-    url = "https://github.com/s1n7ax/nvim-search-and-replace"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -245,11 +249,6 @@ _G.packer_plugins = {
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
-  ["vim-mustache-handlebars"] = {
-    loaded = true,
-    path = "/home/ad/.local/share/nvim/site/pack/packer/start/vim-mustache-handlebars",
-    url = "https://github.com/mustache/vim-mustache-handlebars"
-  },
   ["vim-visual-multi"] = {
     loaded = true,
     path = "/home/ad/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
@@ -258,10 +257,13 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-search-and-replace
-time([[Config for nvim-search-and-replace]], true)
-try_loadstring("\27LJ\2\nE\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\28nvim-search-and-replace\frequire\0", "config", "nvim-search-and-replace")
-time([[Config for nvim-search-and-replace]], false)
+
+_G._packer.inside_compile = false
+if _G._packer.needs_bufread == true then
+  vim.cmd("doautocmd BufRead")
+end
+_G._packer.needs_bufread = false
+
 if should_profile then save_profiles() end
 
 end)

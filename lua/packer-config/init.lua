@@ -1,4 +1,10 @@
 return require('packer').startup(function(use)
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function()
+      vim.fn["mkdp#util#install"]()
+    end
+  }) --- markdown preview
   use 'wbthomason/packer.nvim'
   use 'EdenEast/nightfox.nvim' -- theme
   use 'kyazdani42/nvim-tree.lua' -- file explorer
@@ -29,14 +35,8 @@ return require('packer').startup(function(use)
 
   -- use "lukas-reineke/lsp-format.nvim"
 
-  use 'mustache/vim-mustache-handlebars' -- code hightlight hbs
+  -- use 'mustache/vim-mustache-handlebars' -- code hightlight hbs
   use 'sunjon/shade.nvim' -- > dims  inactive windows,
-  use {
-    's1n7ax/nvim-search-and-replace', --- find and replace
-    config = function()
-      require'nvim-search-and-replace'.setup()
-    end
-  }
   use 'mg979/vim-visual-multi' -- multi select
   use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'} -- nvim fold
   -- lsp
